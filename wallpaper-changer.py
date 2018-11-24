@@ -24,10 +24,10 @@ os.environ['DISPLAY'] = ':0'
 try:
     size = get_max_window_size()
     wallpaper_file_name = download_wallpaper(size[0], size[1])
-    sleep(5)
+    #sleep(5)
     set_wallpaper(wallpaper_file_name)
 except:
     log('Unable to detect maximum resolution')
     wallpaper_file_name = download_wallpaper()
-    sleep(5)
+    #sleep(5)
     set_wallpaper(wallpaper_file_name)
