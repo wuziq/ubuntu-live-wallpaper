@@ -26,7 +26,13 @@ def download_wallpaper(width=1600, height=900):
     # image url
     base_url = "https://source.unsplash.com"
     tags = get_tags()
-    image_url = base_url + "/category/" + category + "/" + str(width) + "x" + str(height) + "?" + tags
+    #image_url = base_url + "/category/" + category + "/" + str(width) + "x" + str(height) + "?" + tags
+    # water
+    #image_url = "https://source.unsplash.com/collection/1598187/1920x1080"
+    # landscapes
+    #image_url = "https://source.unsplash.com/collection/1598189/1920x1080"
+    # my first collection (everything)
+    image_url = "https://source.unsplash.com/collection/1598183/1920x1080"
 
     # download image
     try:
