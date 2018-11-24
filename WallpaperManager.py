@@ -26,7 +26,7 @@ def download_wallpaper(width=1920, height=1080):
     # image url
     base_url = "https://source.unsplash.com"
     tags = get_tags()
-	collection = 1598183
+    collection = 1598183
     #image_url = '{}/{}x{}?{},{}'.format(base_url,
     #                                    str(width), str(height), category, tags)
     image_url = '{}/{}/{}/{}x{}'.format(base_url, "collection", str(collection), str(width), str(height))
