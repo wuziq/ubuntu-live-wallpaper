@@ -8,15 +8,15 @@
 # python_version  :2.6.6
 # ==============================================================================
 
-# Import essential libraries
 import os
 import random
 import urllib
+
 from helper import base_path, log, download_image
 from configManager import get_categories, get_tags
 
 
-def download_wallpaper(width=1600, height=900):
+def download_wallpaper(width=1920, height=1080):
     """Return the downloaded wallpaper file name"""
 
     # available categories
@@ -26,20 +26,23 @@ def download_wallpaper(width=1600, height=900):
     # image url
     base_url = "https://source.unsplash.com"
     tags = get_tags()
-    #image_url = base_url + "/category/" + category + "/" + str(width) + "x" + str(height) + "?" + tags
-    # water
+	collection = 1598183
+    #image_url = '{}/{}x{}?{},{}'.format(base_url,
+    #                                    str(width), str(height), category, tags)
+    image_url = '{}/{}/{}/{}x{}'.format(base_url, "collection", str(collection), str(width), str(height))
     #image_url = "https://source.unsplash.com/collection/1598187/1920x1080"
     # landscapes
     #image_url = "https://source.unsplash.com/collection/1598189/1920x1080"
     # my first collection (everything)
-    image_url = "https://source.unsplash.com/collection/1598183/1920x1080"
+    #image_url = "https://source.unsplash.com/collection/1598183/1920x1080"
 
     # download image
     try:
         wallpaper_name = 'wallpaper.jpg'
         response = download_image(image_url, base_path("/" + wallpaper_name))
     except:
-        if not os.path.isfile(base_path("/" + wallpaper_name)):  # if previously download wallpaper not exist
+        # if previously download wallpaper not exist
+        if not os.path.isfile(base_path("/" + wallpaper_name)):
             wallpaper_name = "default-wallpaper.jpg"  # show the default wallpaper
         log('Unable to download wallpaper')
 
@@ -47,7 +50,9 @@ def download_wallpaper(width=1600, height=900):
 
 
 def set_wallpaper(file_name):
-    """ Set wallpaper"""
+    """Set wallpaper"""
     dbus_session_bus_address = "PID=$(pgrep gnome-session) && export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-) && "
-    command = dbus_session_bus_address + "gsettings set org.gnome.desktop.background picture-uri file:///" + file_name
+    command = "{}gsettings set org.gnome.desktop.background picture-uri file:///{}".format(
+        dbus_session_bus_address, file_name)
+
     os.system(command)
